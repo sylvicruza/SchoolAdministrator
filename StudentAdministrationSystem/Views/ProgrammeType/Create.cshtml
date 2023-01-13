@@ -1,0 +1,44 @@
+﻿@model StudentAdministrationSystem.Models.ProgrammeType
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Create</h1>
+<p class="mb-4">Programme Type</p>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add programme year</h6>
+    </div>
+    <div class="card-body">
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label >Number Of Module</label>
+                <input asp-for="NumberOfCourseModule" class="form-control" />
+                <span asp-validation-for="NumberOfCourseModule" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

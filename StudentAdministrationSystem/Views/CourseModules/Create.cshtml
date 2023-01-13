@@ -1,0 +1,171 @@
+﻿@model StudentAdministrationSystem.Models.CourseModule
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Create</h1>
+<p class="mb-4">Module</p>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Add Module</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+   
+         <div class="form-group">
+                <label>Programme</label>
+        
+                <select asp-for="DegreeProgrammeId" class="form-control">
+                    <option value="">--Choose programme--</option>
+                    @foreach (var item in  ViewBag.Programme)
+                        {
+                        <option value="@item.ID">(@item.Code)  @item.Title</option>
+                     }
+                </select>
+                <span asp-validation-for="DegreeProgrammeId" class="text-danger"></span>
+            </div>
+
+        <div class="form-group">
+            <label asp-for="CourseTitle" class="control-label"></label>
+            <input asp-for="CourseTitle" class="form-control" />
+            <span asp-validation-for="CourseTitle" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="CourseCode" class="control-label"></label>
+            <input asp-for="CourseCode" class="form-control" />
+            <span asp-validation-for="CourseCode" class="text-danger"></span>
+        </div>
+ 
+
+
+   
+        <div class="form-group">
+            <label asp-for="CourseType" class="control-label"></label>
+              <select asp-for="CourseType" class="form-control">
+                    <option value="">--Choose type--</option>
+                            <option value="Optional">Optional</option>
+                            <option value="Mandatory">Mandatory</option>
+              </select>
+            
+            <span asp-validation-for="CourseType" class="text-danger"></span>
+        </div>
+       
+        
+        <div class="form-group">
+            <label>Assign Mark</label>
+            <input asp-for="Marks" class="form-control" />
+            <span asp-validation-for="Marks" class="text-danger"></span>
+        </div>
+                   
+                   
+
+@*
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <button type="button" id="button_add1" class="btn-sm btn-success btn">Add Assessment</button>
+        <button type="button" id="button_del1" class="btn-sm btn-warning btn">Remove Assessment</button>
+    </div>
+    <p></p>
+    <div class="col-md-12 col-sm-6 col-xs-12 table-responsive">
+        <table id="mytab1" class="table table-striped table-bordered table-hover" cellspacing="0" style="width: 100%">
+            <thead>
+                <tr>
+                    <th>AssessmentName</th>
+                    <th>AssesmentMark</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Assessment != null)
+                {
+                    foreach (var item in Model.Assessment)
+                    {
+                        <tr>
+
+                            <td><input asp-for="@item.AssessmentName" type="text" class="form-control" /></td>
+
+                            <td><input asp-for="@item.Marks" type="text" class="form-control" /></td>
+
+                            <td><input type="hidden" asp-for="@item.AssessmentID" /></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+    <p></p>
+    <input type="submit" value="Create" class="btn btn-primary" />
+
+</form>
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+  
+    <script>
+     
+            
+
+        $(document).ready(function () {
+                
+
+            var t = $('#mytab1').DataTable({
+                dom: 'rt',
+                select: { style: 'single' },
+                ordering: false,
+
+                "language": {
+                    "emptyTable": "No request fields. Click Add"
+                }
+
+
+            });
+       
+
+            var counter = t.rows().data().length;
+
+            $('#button_add1').on('click', function (e) {
+                e.preventDefault();
+                t.row.add([
+
+                    '<input asp-for="AssessmentName" class="form-control">',
+                    '<input asp-for="Mark" class="form-control ">',
+   
+                ]).draw(false);
+
+                counter++;
+            });
+
+           @* $('#button_del1').on('click', function (e) {
+                alert("Who dey breathe");
+                
+                var dt = $('#mytab1').DataTable();
+                dt.row('.selected').remove().draw(false);
+            });*@
+
+            $('#button_del1').click(function (e) {
+                e.preventDefault();
+                var dt = $('#mytab1').DataTable();
+                dt.row('.selected').remove().draw(false);
+            });
+
+        });
+
+    </script>
+    
+}

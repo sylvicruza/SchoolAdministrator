@@ -1,0 +1,161 @@
+﻿@model IEnumerable<StudentAdministrationSystem.Models.Enrollment>
+
+@{
+	ViewData["Title"] = "GradeStudent";
+}
+<h1 class="h3 mb-2 text-gray-800">GRADE PROGRAMME</h1>
+
+
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Student Information:</h6>
+	</div>
+	<div class="card-body">
+
+		<dl class="row">
+       
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+            Fullname:
+        </dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-dark text-uppercase mb-1">
+				@ViewBag.student.Student.FirstName @ViewBag.student.Student.LastName
+        </dd>
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+				Student Number:
+            </dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-dark text-uppercase mb-1">
+				@ViewBag.student.Student.StudentNumber
+            </dd>
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+				Email:
+			</dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-dark text-uppercase mb-1">
+				@ViewBag.student.Student.Email
+			</dd>
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+            Programme:
+        </dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-dark text-uppercase mb-1">
+				@ViewBag.student.DegreeProgramme.Title
+			</dd>
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+                Programme Code:
+            </dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-dark text-uppercase mb-1">
+				@ViewBag.student.DegreeProgramme.Code
+            </dd>
+			
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-success text-uppercase mb-1">
+				Programme Grade:
+			</dt>
+			@if (ViewBag.student.Remarks == "UNDEFINED" || ViewBag.student.Overall < 50)
+			{
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+				@ViewBag.student.Remarks
+			</dd>
+			}else{
+				<dd class="col-sm-10 text-sm-left font-weight-bold text-success text-uppercase mb-1">
+					@ViewBag.student.Remarks
+				</dd>
+			}
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+				Average:
+			</dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-success text-uppercase mb-1">
+				@ViewBag.student.Overall
+			</dd>
+			<dt class="col-sm-2 text-sm-left font-weight-bold text-decoration-none text-uppercase mb-1">
+				Number of Courses:
+			</dt>
+			<dd class="col-sm-10 text-sm-left font-weight-bold text-success text-uppercase mb-1">
+				@ViewBag.student.CourseCount
+			</dd>
+
+    </dl>
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						
+
+						<th>
+							Course Code
+						</th>
+						<th>
+							Course Title
+						</th>
+						<th>
+							Overall Mark
+						</th>
+						<th>
+							Remarks
+						</th>
+						<th>
+							Actions
+						</th>
+						
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in @ViewBag.student.Course)
+					{
+						<tr>
+							
+							<td>
+								@item.Code
+							</td>
+	
+							<td>
+								@item.Name
+							</td>
+							
+							@if (item.Marks == 0)
+							{
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									UNDEFINED
+								</td>
+							}
+							else if(item.Marks < 45){
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									@item.Marks
+								</td>
+							}
+							else
+							{
+								<td class="text-sm-left font-weight-bold text-success text-uppercase mb-1">
+									@item.Marks
+								</td>
+							}
+							@if (item.Marks == 0)
+							{
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									UNDEFINED
+								</td>
+							}
+							else if (item.Marks < 45)
+							{
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									@item.Remarks
+								</td>
+							}
+							else
+							{
+								<td class="text-sm-left font-weight-bold text-success text-uppercase mb-1">
+									@item.Remarks
+								</td>
+							}
+							<td>
+								<a asp-action="StudentView" asp-route-id="@ViewBag.student.Student.Id" asp-route-courseId="@item.Id" class="btn btn-primary  btn-sm">
+									<i class="fas fa-pen"> </i> Grade Module
+								</a>
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,76 @@
+﻿@model IEnumerable<StudentAdministrationSystem.Models.Assessment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<h1 class="h3 mb-2 text-gray-800">Index</h1>
+<p class="mb-4">
+    <a asp-action="Create" class="btn btn-primary btn-icon-split btn-sm">
+        <span class="icon text-gray-600">
+            <i class="fas fa-arrow-right"></i>
+        </span>
+        <span class="text">Create New</span>
+    </a>
+</p>
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List of Assessment</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course.CourseTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AssessmentName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Marks)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @Html.DisplayFor(modelItem => item.Course.Programme.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+                </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssessmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marks)
+            </td>
+            <td>
+                                <a asp-action="Details" asp-route-id="@item.AssessmentID" class="btn btn-info  btn-sm">
+                                    <i class="fas fa-eye"> </i> View
+                                </a>
+                                <a asp-action="Edit" asp-route-id="@item.AssessmentID" class="btn btn-primary  btn-sm">
+                                    <i class="fas fa-pen"> </i> Edit
+                                </a>
+
+                                <a asp-action="Delete" asp-route-id="@item.AssessmentID" class="btn btn-danger  btn-sm">
+                                    <i class="fas fa-trash"> </i> Delete
+                                </a>
+               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>
+</div>
+</div>
+

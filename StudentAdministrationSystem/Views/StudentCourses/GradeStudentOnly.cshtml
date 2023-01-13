@@ -1,0 +1,86 @@
+﻿@model IEnumerable<StudentAdministrationSystem.Models.Enrollment>
+
+@{
+	ViewData["Title"] = "GradeStudent";
+}
+<h1 class="h3 mb-2 text-gray-800">Index</h1>
+
+
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Grade Student</h6>
+	</div>
+	<div class="card-body">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							Overall Module Mark
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Student.StudentNumber)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Student.FirstName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Student.LastName)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.DegreeProgramme)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.CourseModule)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							@if (item.Mark == 0)
+							{
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									UNDEFINED
+								</td>
+							}
+							else
+							{
+								<td class="text-sm-left font-weight-bold text-success text-uppercase mb-1">
+									@item.Mark
+								</td>
+							}
+
+							<td>
+								@Html.DisplayFor(modelItem => item.Student.StudentNumber)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Student.FirstName)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Student.LastName)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.DegreeProgramme.Title)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.CourseModule.CourseTitle)
+							</td>
+							<td>
+								<a asp-action="GradeStudentCreate" asp-route-id="@item.Id" class="btn btn-success btn-circle btn-sm">
+									<i class="fas fa-pen"></i>
+								</a>
+
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

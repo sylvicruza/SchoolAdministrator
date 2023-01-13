@@ -1,0 +1,101 @@
+﻿@model IEnumerable<StudentAdministrationSystem.Models.Enrollment>
+
+@{
+    ViewData["Title"] = "ListView";
+}
+<h1 class="h3 mb-2 text-gray-800">REPORTS</h1>
+
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List Of Students</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                <thead>
+                    <tr>
+                        <th>
+                            StudentNumber
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            DegreeProgramme
+                        </th>
+                       
+                         <th>
+                          Cohort
+                        </th>
+                        <th>
+                            Average
+                        </th>
+                        <th>
+                            Grade
+                        </th>
+                        <th>View Report</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.student)
+                    {
+                        <tr>
+                            <td>
+                                @item.Student.StudentNumber
+                            </td>
+                            <td>
+                                @item.Student.FirstName   @item.Student.LastName
+                            </td>
+                            <td>
+                                (@item.DegreeProgramme.Code) @item.DegreeProgramme.Title
+                            </td>
+
+                           
+                            <td>
+                                @item.Student.Cohort
+                            </td>
+                            <td class="text-sm-left font-weight-bold text-success text-uppercase mb-1">
+                                @item.Overall
+                            </td>
+
+                            @if (item.Remarks == "UNDEFINED" || item.Overall < 50)
+							{
+                            <td class=" text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+                                @item.Remarks
+                            </td>
+                            }else{
+                                <td class=" text-sm-left font-weight-bold text-success text-uppercase mb-1">
+                                    @item.Remarks
+                                </td>
+                            }
+                            <td>
+                            
+                                <a asp-action="StudentReport" asp-route-id="@item.Student.Id" class="btn btn-facebook  btn-sm">
+                                    <i class="fas fa-chart-bar"> </i> View Report
+                                </a>
+                                @if (item.Remarks != "UNDEFINED")
+                                {
+                                    <a asp-action="PrintReport" asp-route-id="@item.Student.Id" class="btn btn-facebook  btn-sm">
+                                    <i class="fas fa-print"> </i> Download
+                                </a>
+                            }
+
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    }

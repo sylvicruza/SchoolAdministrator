@@ -1,0 +1,104 @@
+﻿@model StudentAdministrationSystem.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="h3 mb-2 text-gray-800">ENROLL STUDENT TO MODULE</h1>
+<p class="mb-4">Assign Module to Student</p>
+
+<div class="row">
+    <div class="col-lg-8">
+<div class="card shadow mb-8">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Assign Module</h6>
+    </div>
+    <div class="card-body">
+
+    <div class="col-md-8">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label>Student</label>
+               
+                     
+                        <span  class="form-control">@ViewBag.StudentId</span>
+                    
+                        <input type="hidden" asp-for="StudentId" />
+            </div>
+            <div class="form-group">
+                <label>Programme</label>
+              
+       
+                        <span class="form-control">@ViewBag.DegreeProgrammeId</span>
+                        <input type="hidden" asp-for="DegreeProgrammeId" />
+            </div>
+             
+            <div class="form-group">
+                <label>Module</label>
+                <span asp-validation-for="CourseModuleId" class="text-danger"></span>
+            <select class="form-control" asp-for="CourseModuleId">
+                <option value="">--Select module--</option>
+                @foreach (var item in ViewBag.CourseModuleId)
+                {
+                        <option value="@item.ID">(@item.CourseCode)  @item.CourseTitle - @item.CourseType </option>
+                }
+            </select>
+            </div>
+           
+           
+           @* <div class="form-group">
+                <label >Maximum Mark</label>
+                <input asp-for="Mark" class="form-control" />
+                <span asp-validation-for="Mark" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+    <div class="col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Modules Assigned To Student </h6>
+            </div>
+            <div class="card-body">
+                 @foreach (var item in ViewBag.assigned)
+                    {
+                <dl class="row">
+                        <dt class="col-sm-3">
+                            @item.CourseModule.CourseCode
+                        </dt>
+
+                        <dd class="col-sm-9">
+                            @item.CourseModule.CourseTitle
+                        </dd>               
+                </dl>
+                }
+            </div>
+        </div>
+    </div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+           
+
+         
+
+        });
+
+    </script>
+}

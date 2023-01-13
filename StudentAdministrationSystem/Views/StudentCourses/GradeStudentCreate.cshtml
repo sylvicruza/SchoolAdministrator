@@ -1,0 +1,169 @@
+﻿@model StudentAdministrationSystem.Models.Enrollment
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Assign Score To @ViewBag.CourseModuleId</h1>
+<p class="mb-4">Assign Module to Student</p>
+
+<div class="row">
+    <div class="col-lg-7">
+<div class="card shadow mb-8">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Assign Module</h6>
+    </div>
+    <div class="card-body">
+
+    <div class="col-md-8">
+        <form asp-action="GradeStudentEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label>Student</label>
+
+
+                            <input readonly="readonly" class="form-control" value="@ViewBag.StudentId"></input>
+                    
+                        <input type="hidden" asp-for="StudentId" />
+            </div>
+            <div class="form-group">
+                <label>Programme</label>
+
+
+                            <input readonly="readonly" class="form-control" value="@ViewBag.DegreeProgrammeId"></input>
+                        <input type="hidden" asp-for="DegreeProgrammeId" />
+            </div>
+             
+            <div class="form-group">
+                <label>Module</label>
+                <span asp-validation-for="CourseModuleId" class="text-danger"></span>
+                            <input readonly="readonly" class="form-control" value="@ViewBag.CourseModuleId"></input>
+                            <input type="hidden" asp-for="CourseModuleId" />
+            </div>
+
+                        <div class="form-group">
+                            <label>Assessment</label>
+                            <span asp-validation-for="AssessmentId" class="text-danger"></span>
+                            <input readonly="readonly" class="form-control" value="@ViewBag.AssessmentId"></input>
+                            <input type="hidden" asp-for="AssessmentId" />
+                        </div>
+           
+           
+            <div class="form-group">
+                <label >Maximum Mark</label>
+                <input asp-for="Mark" class="form-control" />
+                <span asp-validation-for="Mark" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+    <div class="col-lg-5">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Assessment Score  </h6>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                <dt class="col-sm-12">
+                Course:            @ViewBag.CourseModuleId
+                </dt>
+                </dl>
+                 <dl class="row">
+                    @foreach (var item in ViewBag.assessmentScore.Info)
+                    {
+                
+
+                        <dt class="col-sm-3">
+                            @item.Marks
+                        </dt>
+                        <dd class="col-sm-9">
+                            @item.AssessmentName
+                        </dd>
+
+                    }
+                </dl>
+                <span class="text-sm-left font-weight-bold text-success  mb-1">
+                    Overall score: @ViewBag.assessmentScore.Overall
+                </span>
+                
+            </div>
+        </div>
+
+        @*<div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">All Assessment For Module</h6>
+            </div>
+            <div class="card-body">
+                
+
+                    @foreach (var item in ViewBag.assigned)
+                    {
+                        <dl class="row">
+                            <dt class="col-sm-2">
+                                @item.Mark
+                            </dt>
+                            <dt class="col-sm-6">
+                                @item.CourseModule.CourseTitle
+                            </dt>
+                            <dd class="col-sm-4">
+                                @item.Assessment.AssessmentName
+                            </dd>
+                        </dl>
+                    }
+             
+
+            </div>
+        </div>*@
+    </div>
+<div>
+    <a asp-action="GradeStudent">Back to List</a>
+</div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}  
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#CourseModuleId").change(function () {
+                var CourseModuleId = $("#CourseModuleId").val();
+                if (CourseModuleId != '')
+                alert(CourseModuleId);
+
+                var postData = { CourseModuleId: CourseModuleId };
+                var url = "/StudentCourses/GradeStudentCreate/GetAssessments";
+                
+                var result;
+                $.ajax({
+                    url: url,
+                    data: JSON.stringify(postData),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    success: function (data1) {
+                        result = '' + String(data1);
+                        alert(result);
+                        
+                    }, error: function (data) {
+                       
+                    }
+                });
+                console.log("got out");
+            });
+       
+
+         
+
+        });
+
+    </script>
+}

@@ -1,0 +1,105 @@
+﻿@model IEnumerable<StudentAdministrationSystem.Models.Enrollment>
+
+@{
+	ViewData["Title"] = "GradeStudent";
+}
+<h1 class="h3 mb-2 text-gray-800">Index</h1>
+
+
+
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<h6 class="m-0 font-weight-bold text-primary">Grade Student</h6>
+	</div>
+	<div class="card-body">
+
+		<dl class="row">
+       
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Student)
+        </dt>
+        <dd class = "col-sm-10">
+				@ViewBag.student.FirstName @ViewBag.student.LastName
+        </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Student.StudentNumber)
+            </dt>
+            <dd class="col-sm-10">
+				@ViewBag.student.StudentNumber
+            </dd>
+        <dt class = "col-sm-2">
+            Programme
+        </dt>
+        <dd class = "col-sm-10">
+				@ViewBag.student.DegreeProgramme.Title
+        </dd>
+            <dt class="col-sm-2">
+                Programme Code
+            </dt>
+            <dd class="col-sm-10">
+				@ViewBag.student.DegreeProgramme.Code
+            </dd>
+    </dl>
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>
+							Score
+						</th>
+
+						<th>
+							@Html.DisplayNameFor(model => model.CourseModule.CourseCode)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.CourseModule)
+						</th>
+						<th>
+							@Html.DisplayNameFor(model => model.Assessment)
+						</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						<tr>
+							@if (item.Mark == 0)
+							{
+								<td class="text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+									UNDEFINED
+								</td>
+							}
+							else
+							{
+								<td class="text-sm-left font-weight-bold text-success text-uppercase mb-1">
+									@item.Mark
+								</td>
+							}
+							<td>
+								@Html.DisplayFor(modelItem => item.CourseModule.CourseCode)
+							</td>
+	
+							<td>
+								@Html.DisplayFor(modelItem => item.CourseModule.CourseTitle)
+							</td>
+							<td>
+								@Html.DisplayFor(modelItem => item.Assessment.AssessmentName)
+							</td>
+							<td>
+							
+								<a asp-action="GradeStudentCreate" asp-route-id="@item.Id" class="btn btn-primary  btn-sm">
+									<i class="fas fa-pen"> </i> Grade Assessment
+								</a>
+
+								
+
+							</td>
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+

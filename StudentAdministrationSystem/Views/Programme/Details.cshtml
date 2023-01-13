@@ -1,0 +1,109 @@
+﻿@model StudentAdministrationSystem.Models.DegreeProgramme
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Details</h1>
+<p class="mb-4">Degree Programme</p>
+
+
+<div class="card shadow mb-12">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">View Details</h6>
+    </div>
+    <div class="card-body">
+      <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+    </dl>
+</div>
+</div>
+ <div class="card shadow mb-12">
+    <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List Of Modules Under Programme</h6>
+        </div>
+     <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>                         
+                            <th>
+                               CourseTitle
+                            </th>
+                            <th>
+                              CourseCode
+                            </th>
+                            <th>
+                                Overall Mark
+                            </th>
+                            <th>
+                               CourseType
+                            </th>
+
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CourseModules)
+                        {
+                            <tr>
+                                
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseTitle)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseCode)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Marks)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CourseType)
+                                </td>
+
+                                <td>
+                                    <a asp-controller="CourseModules" asp-action="Details" asp-route-id="@item.ID" class="btn btn-info  btn-sm">
+                                        <i class="fas fa-eye"> </i> View
+                                    </a>
+                                    <a asp-controller="CourseModules" asp-action="Edit" asp-route-id="@item.ID" class="btn btn-primary  btn-sm">
+                                        <i class="fas fa-pen"> </i> Edit
+                                    </a>
+
+                                    <a asp-controller="CourseModules" asp-action="Delete" asp-route-id="@item.ID" class="btn btn-danger  btn-sm">
+                                        <i class="fas fa-trash"> </i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+ <div>
+            <a asp-action="Edit" asp-route-id="@Model.ID">Edit</a> |
+            <a asp-action="Index">Back to List</a>
+        </div>
+      </div>
+       
+</div>
+
+
+
+

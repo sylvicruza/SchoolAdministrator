@@ -1,0 +1,188 @@
+﻿@model StudentAdministrationSystem.Models.Student
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Details</h1>
+<p class="mb-4">Student</p>
+
+
+<div class="row">
+    <div class="col-lg-6">
+
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Student Details</h6>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.FirstName)
+                    </dt>
+                    
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.FirstName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.LastName)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.LastName)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Email)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Email)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.ContactNo)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.ContactNo)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Address)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Address)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.Cohort)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.Cohort)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.EnrollmentDate)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.EnrollmentDate)
+                    </dd>
+                    <dt class="col-sm-4">
+                        @Html.DisplayNameFor(model => model.DegreeProgramme)
+                    </dt>
+                    <dd class="col-sm-8">
+                        @Html.DisplayFor(model => model.DegreeProgramme.Title)
+                    </dd>
+
+                    <dt class="col-sm-4">
+                      &nbsp;
+                    </dt>
+                    <dd class="col-sm-8">
+                        &nbsp;
+                    </dd>
+                    <dt class="col-sm-4">
+                        &nbsp;
+                    </dt>
+                    <dd class="col-sm-8">
+                        &nbsp;
+                    </dd>
+                    <dt class="col-sm-2">
+                        Status
+                    </dt>
+                  
+                    @if (ViewBag.assignedcount == ViewBag.availablecount)
+                    {
+                        <dd class="col-sm-5 text-sm-left font-weight-bold text-success text-uppercase mb-1">
+                            ENROLLED
+                        </dd>
+                    }
+                    else
+                    {
+                        <dd class="col-sm-5 text-sm-left font-weight-bold text-danger text-uppercase mb-1">
+                            NOT ENROLLED  <a asp-controller="StudentCourses" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-default btn-icon-split btn-sm">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text">Enroll Student Now</span>
+                            </a>
+                        </dd>
+                        
+                    }
+
+                </dl>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+    <div class="col-lg-6">
+
+        <!-- Circle Buttons -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Available Courses For @Model.DegreeProgramme.Title</h6>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                            @foreach (var item in ViewBag.available)
+                            {
+                                 <dt class="col-sm-6">
+                            @item.CourseCode     @item.CourseTitle
+                                    </dt>
+
+                                      <dd class="col-sm-3">
+                                       @item.CourseType
+                                    </dd>
+                                    <dd class="col-sm-3">
+                            <a asp-controller="CourseModules" asp-action="Details" asp-route-id="@item.ID" class="btn btn-default btn-icon-split btn-sm">
+                                <span class="icon text-gray-600">
+                                    <i class="fas fa-arrow-right"></i>
+                                </span>
+                                <span class="text">View Course</span>
+                            </a>
+                                    </dd>
+                                  
+                            }
+                </dl>
+               
+                       
+                </div>
+            </div>
+       
+
+        <!-- Brand Buttons -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Courses assigned to @Model.FirstName @Model.LastName With RegNO: @Model.StudentNumber </h6>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                
+                    @foreach (var item in ViewBag.assigned)
+                    {
+                        <dt class="col-sm-6">
+                            @item.CourseModule.CourseCode     @item.CourseModule.CourseTitle
+                        </dt>
+
+                        <dd class="col-sm-6">
+                            @item.CourseModule.CourseType &nbsp;&nbsp;&nbsp;&nbsp; <span class="text-sm-left font-weight-bold text-success text-uppercase ">
+                                ASSIGNED
+                            </span>
+                        </dd>
+                        
+                          
+
+                    }
+                </dl>
+                <span>
+                    <i class="fas fa-info-circle"> Number of Courses Assigned &nbsp;@ViewBag.assignedcount of @ViewBag.availablecount</i>
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>
+</div>
+
+
+<!-- /.container-fluid -->

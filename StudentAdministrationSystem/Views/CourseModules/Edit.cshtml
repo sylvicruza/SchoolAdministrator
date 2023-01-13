@@ -1,0 +1,99 @@
+﻿@model StudentAdministrationSystem.Models.CourseModule
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="h3 mb-2 text-gray-800">Edit</h1>
+<p class="mb-4">Module</p>
+
+<div class="row">
+<div class="col-lg-8">
+<div class="card shadow mb-8">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Edit Module</h6>
+    </div>
+    <div class="card-body">
+<div class="row">
+    <div class="col-md-8">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label>Programme</label>
+
+                <select asp-for="DegreeProgrammeId" class="form-control">
+                    <option value="">--Choose programme--</option>
+                    @foreach (var item in ViewBag.Programme)
+                    {
+                        <option value="@item.ID">@item.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="DegreeProgrammeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseTitle" class="control-label"></label>
+                <input asp-for="CourseTitle" class="form-control" />
+                <span asp-validation-for="CourseTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseCode" class="control-label"></label>
+                <input asp-for="CourseCode" class="form-control" />
+                <span asp-validation-for="CourseCode" class="text-danger"></span>
+            </div>
+    
+
+                            <div class="form-group">
+                                <label asp-for="CourseType" class="control-label"></label>
+                                <select asp-for="CourseType" class="form-control">
+                                    <option value="">--Choose type--</option>
+                                    <option value="Optional">Optional</option>
+                                    <option value="Mandatory">Mandatory</option>
+                                </select>
+
+                                <span asp-validation-for="CourseType" class="text-danger"></span>
+                            </div>
+            <div class="form-group">
+                <label asp-for="Marks" class="control-label"></label>
+                <input asp-for="Marks" class="form-control" />
+                <span asp-validation-for="Marks" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+</div>
+</div>
+</div>
+<div class="col-lg-4">
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Module max score details</h6>
+    </div>
+    <div class="card-body">
+       
+            @foreach (var item in Model.Assessment)
+            {
+                    <div>@item.AssessmentName</div>
+                        <div class="progress mb-4">
+                            
+                            <div class="progress-bar bg-info" role="progressbar" style="width: @item.Marks%" aria-valuenow="@item.Marks" aria-valuemin="0" aria-valuemax="100">@item.Marks</div>
+                        </div>
+            }
+       
+               
+    </div>
+</div>
+</div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,185 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <a asp-area="" asp-controller="StudentCourses" asp-action="ResultView" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+</div>
+
+<!-- Content Row -->
+<div class="row">
+
+    <!-- PROGRAMME TYPE  -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="ProgrammeType" asp-action="Index">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Programme Year</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.programmeTypeCount</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-user-clock fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- PROGRAMME  -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="Programme" asp-action="Index">
+        <div class="card border-left-primary shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Programmes</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.programmeCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <!-- MODULE -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="CourseModules" asp-action="Index">
+        <div class="card border-left-info shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Modules</div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.courseCount</div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-book-open fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <!-- ASSESSMENT -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="CourseModules" asp-action="Index">
+            <div class="card border-left-info shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Assessments</div>
+                            <div class="row no-gutters align-items-center">
+                                <div class="col-auto">
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">@ViewBag.assessmentCount</div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-pencil-ruler fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- STUDENT -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="Student" asp-action="Index">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Students</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.studentCount</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-graduation-cap fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+     <!-- ASSIGN STUDENT TO MODULE -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="StudentCourses" asp-action="StudentCourse">
+        <div class="card border-left-success shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Enroll Student to Module</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-share-square fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+    <!-- GRADE -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="StudentCourses" asp-action="GradeStudent">
+            <div class="card border-left-warning shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Grade Student</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-pen-square fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <!-- REPORTS -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <a asp-area="" asp-controller="StudentCourses" asp-action="ResultView">
+        <div class="card border-left-warning shadow h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Reports</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">@ViewBag.studentCourses</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-pie fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+
+
+    
+
+   
+</div>
+
+
+
+
+<!-- /.container-fluid -->
