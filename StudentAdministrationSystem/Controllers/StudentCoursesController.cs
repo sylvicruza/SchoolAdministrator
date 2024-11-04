@@ -66,7 +66,7 @@ namespace StudentAdministrationSystem.Controllers
             ViewBag.Message = response;
             GradeStudent gradeStudent = new GradeStudent(_context);
 
-            ViewData["AllStudents"] = gradeStudent.AllStudent();
+            ViewData["AllStudents"] = gradeStudent.GetAllStudentResults();
             return View();
         }
 
@@ -445,7 +445,7 @@ namespace StudentAdministrationSystem.Controllers
         {
 
             GradeStudent result = new GradeStudent(_context);
-            var studentResult = result.AllStudent();
+            var studentResult = result.GetAllStudentResults();
 
 
             ViewBag.student = studentResult;

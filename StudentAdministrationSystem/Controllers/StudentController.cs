@@ -26,7 +26,7 @@ namespace StudentAdministrationSystem.Controllers
         {
             ViewBag.Message = response;
             GradeStudent result = new GradeStudent(_context);
-            ViewBag.student = result.AllStudent();
+            ViewBag.student = result.GetAllStudentResults();
 
             return View();
         }

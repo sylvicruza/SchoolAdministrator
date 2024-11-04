@@ -1,42 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="wwwroot\js\NewFolder\**" />
-    <Content Remove="wwwroot\js\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\js\NewFolder\**" />
-    <None Remove="wwwroot\js\NewFolder\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="wwwroot\js\NewFolder\**" />
+		<Content Remove="wwwroot\js\NewFolder\**" />
+		<EmbeddedResource Remove="wwwroot\js\NewFolder\**" />
+		<None Remove="wwwroot\js\NewFolder\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
-    <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.30" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.30">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-    <PackageReference Include="MySql.Data" Version="8.0.31" />
-    <PackageReference Include="ServiceStack" Version="6.4.0" />
-    <PackageReference Include="SweetAlert" Version="1.0.0" />
-    <PackageReference Include="Unity.Mvc3" Version="1.2.0" />
-    <PackageReference Include="WebApiContrib.Formatting.Jsonp" Version="3.0.2" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="iTextSharp" Version="5.5.13.3" />
+		<PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.9" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.30" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.30">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+		<PackageReference Include="MySql.Data" Version="8.0.31" />
+		<PackageReference Include="ServiceStack" Version="6.4.0" />
+		<PackageReference Include="SweetAlert" Version="1.0.0" />
+		<PackageReference Include="Unity.Mvc3" Version="1.2.0" />
+		<PackageReference Include="WebApiContrib.Formatting.Jsonp" Version="3.0.2" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\css\" />
-    <Folder Include="wwwroot\images\" />
-    <Folder Include="wwwroot\lib\bootstrap\" />
-    <Folder Include="wwwroot\lib\bootstrap\dist\js\" />
-    <Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
-    <Folder Include="wwwroot\lib\jquery-validation\" />
-    <Folder Include="wwwroot\lib\jquery-validation\dist\" />
-    <Folder Include="wwwroot\lib\jquery\" />
-    <Folder Include="wwwroot\lib\jquery\dist\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="wwwroot\css\" />
+		<Folder Include="wwwroot\images\" />
+		<Folder Include="wwwroot\lib\bootstrap\" />
+		<Folder Include="wwwroot\lib\bootstrap\dist\js\" />
+		<Folder Include="wwwroot\lib\jquery-validation-unobtrusive\" />
+		<Folder Include="wwwroot\lib\jquery-validation\" />
+		<Folder Include="wwwroot\lib\jquery-validation\dist\" />
+		<Folder Include="wwwroot\lib\jquery\" />
+		<Folder Include="wwwroot\lib\jquery\dist\" />
+	</ItemGroup>
 
 </Project>
